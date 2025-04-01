@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Azzouzi Shop</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="nav">
+                <a href="index.html" target="_blank">HOME</a>
+                <a href="ABOUT.html" target="_blank">ABOUT</a>
+                <a href="SHOP.html" target="_blank">SHOP</a>
+                <a href="CONTACT.html" target="_blank">CONTACT</a>
+            </div>
+            <div class="auth-buttons">
+                <button onclick="login()">LOGIN</button>
+                <button onclick="logout()">LOGOUT</button>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h1>About Us</h1>
+        <p>Welcome to Azzouzi Shop! We are dedicated to providing you with the best online shopping experience. Our goal is to offer a wide variety of products that meet your needs and preferences.</p>
+        <img src="about.webp" alt="About Us Image">
+        <p>Our journey began in 2024, when we saw a need for a better way to shop online. Since then, we have been committed to curating a selection of high-quality products at competitive prices. Whether you're looking for the latest fashion trends, the best in tech gadgets, or unique home decor, we've got you covered.</p>
+        <p>We believe in excellent customer service and strive to make your shopping experience seamless and enjoyable. Thank you for choosing Azzouzi Shop. We look forward to serving you!</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Azzouzi Shop. All rights reserved.</p>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="login-popup">
+        <h2>Login</h2>
+        <form onsubmit="return login()">
+            <input type="text" id="login-username" placeholder="Username" required>
+            <div class="password-container">
+                <input type="password" id="login-password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+            <br>
+            <button type="button" onclick="hideLogin()">Cancel</button>
+        </form>
+    </div>
+
+   
+    <div class="popup" id="signup-popup">
+        <h2>Sign Up</h2>
+        <form onsubmit="return signup()">
+            <input type="text" id="signup-username" name="username" placeholder="Username" required>
+            <input type="email" id="signup-email" name="email" placeholder="Email" required>
+            <div class="password-container">
+                <input type="password" id="signup-password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+            <br>
+            <button type="button" onclick="hideSignup()">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        const existingUsers = [
+            { username: 'mehdi', password: 'pass' },
+        ];
+
+        
+        document.querySelector('.auth-buttons button:nth-child(1)').addEventListener('click', function() {
+            showLogin();
+        });
+        
+
+        function showLogin() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('login-popup').style.display = 'block';
+        }
+
+        function hideLogin() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('login-popup').style.display = 'none';
+        }
+
+
+        document.querySelector('.auth-buttons button:nth-child(2)').addEventListener('click', function() {
+            showSignup();
+        });
+
+        function showSignup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('signup-popup').style.display = 'block';
+        }
+
+        function hideSignup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('signup-popup').style.display = 'none';
+        }
+
+
+
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            const user = existingUsers.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert('Login successful!');
+                hideLogin();
+            } else {
+                alert('Invalid username or password.');
+            }
+        }
+
+        function signup() {
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+
+
+            alert('Sign up successful!');
+            hideSignup();
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP - Azzouzi Shop</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style type="text/css">
+        .hero {
+            background-image: url('shop.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: #fff;
+        }
+        .cart-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px;
+        }
+        .cart-popup h3 {
+            margin-top: 0;
+        }
+        .cart-popup ul {
+            list-style: none;
+            padding: 0;
+        }
+        .cart-popup li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .cart-popup button {
+            background: red;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .cart-popup button:hover {
+            background: darkred;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .products .product {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .products .product button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="nav">
+                <a href="index.html" target="_blank">HOME</a>
+                <a href="ABOUT.html" target="_blank">ABOUT</a>
+                <a href="SHOP.html" target="_blank">SHOP</a>
+                <a href="CONTACT.html" target="_blank">CONTACT</a>
+            </div>
+            <div class="auth-buttons">
+                <button onclick="showLogin()">LOGIN</button>
+                <button onclick="showSignup()">SIGNUP</button>
+                <button onclick="showCart()">CART</button>
+            </div>
+        </div>
+    </div>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Azzouzi Shop</h1>
+            <p>Discover the latest trends and best deals</p>
+            <button id="shop-now-btn">Shop Now</button>
+        </div>
+    </div>
+    <div class="products" id="scroll">
+        <div class="product">
+            <img src="images/4.jpg" alt="Product 1">
+            <h2>Mini lecteur de carte mémoire Flash TF, USB 2.0</h2>
+            <p>12.00 MAD</p>
+            <button onclick="addToCart('Mini lecteur de carte mémoire Flash TF, USB 2.0', 12.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/1.jpg" alt="Product 1">
+            <h2>Infinix smart 7 HD X6516, 6,6" - 64 Gb + 4 GB (2+2GB) - 6,6" - Bleu</h2>
+            <p>877.99 MAD</p>
+            <button onclick="addToCart('Infinix smart 7 HD X6516, 6,6 - 64 Gb + 4 GB (2+2GB) - 6,6 - Bleu', 877.99)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/2.jpg" alt="Product 2">
+            <h2>NIVEA MEN Déodorant Silver Protect, 150ml</h2>
+            <p>20.99 MAD</p>
+            <button onclick="addToCart('NIVEA MEN Déodorant Silver Protect, 150ml', 20.99)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/3.jpg" alt="Product 3">
+            <h2>TCL Smart TV 32" Android™ officielle FHD, Google Assistant™ - Bluetooth™ + Support</h2>
+            <p>1499.99 MAD</p>
+            <button onclick="addToCart('TCL Smart TV 32 Android™ officielle FHD, Google Assistant™ - Bluetooth™ + Support', 1499.99)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/5.jpg" alt="Product 4">
+            <h2>Sony Console Playstation 5 Edition Digital</h2>
+            <p>6,399.00 MAD</p>
+            <button onclick="addToCart('Sony Console Playstation 5 Edition Digital', 6399.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/6.jpg" alt="Product 6">
+            <h2>Siera Machine à laver à hublot 6Kg (T842 S)</h2>
+            <p>2,429.00 MAD</p>
+            <button onclick="addToCart('Siera Machine à laver à hublot 6Kg (T842 S)', 2429.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/7.jpg" alt="Product 7">
+            <h2>XIAOMI 10000mAh Mi 18W Fast Charge Power Bank 3 black</h2>
+            <p>189.00 MAD</p>
+            <button onclick="addToCart('XIAOMI 10000mAh Mi 18W Fast Charge Power Bank 3 black', 189.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/8.jpg" alt="Product 8">
+            <h2>Smart watch S8 ultra+earphones Appel,NFC,pression artérielle,Sport</h2>
+            <p>349.00 MAD</p>
+            <button onclick="addToCart('Smart watch S8 ultra+earphones Appel,NFC,pression artérielle,Sport', 349.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/9.jpg" alt="Product 8">
+            <h2>Pack gaming all in one 4 en 1 clavier gamer, souris 7 buttons + casque et tapis</h2>
+            <p>234.99 MAD</p>
+            <button onclick="addToCart('Pack gaming all in one 4 en 1 clavier gamer, souris 7 buttons + casque et tapis', 234.99)">Add to Cart</button>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 My Azzouzi Shop. All rights reserved.</p>
+    </div>
+    <div class="overlay" id="overlay" onclick="hideCart()"></div>
+    <div class="cart-popup" id="cart-popup">
+        <h3>Shopping Cart</h3>
+        <ul id="cart-items"></ul>
+        <p id="cart-total"></p>
+        <button onclick="hideCart()">Close</button>
+    </div>
+    <div class="overlay" id="login-overlay"></div>
+    <div class="popup" id="login-popup">
+        <h2>Login</h2>
+        <form onsubmit="return login()">
+            <input type="text" id="login-username" placeholder="Username" required>
+            <div class="password-container">
+                <input type="password" id="login-password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+            <br>
+            <button type="button" onclick="hideLogin()">Cancel</button>
+        </form>
+    </div>
+    <div class="popup" id="signup-popup">
+        <h2>Sign Up</h2>
+        <form onsubmit="return signup()">
+            <input type="text" id="signup-username" name="username" placeholder="Username" required>
+            <input type="email" id="signup-email" name="email" placeholder="Email" required>
+            <div class="password-container">
+                <input type="password" id="signup-password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+            <br>
+            <button type="button" onclick="hideSignup()">Cancel</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('shop-now-btn').addEventListener('click', function() {
+            document.getElementById('scroll').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        const existingUsers = [
+            { username: 'mehdi', password: 'pass' },
+        ];
+        const emails = [
+            { email: 'mehdi@gmail.com' },
+        ];
+
+        function showLogin() {
+            document.getElementById('login-overlay').style.display = 'block';
+            document.getElementById('login-popup').style.display = 'block';
+        }
+
+        function hideLogin() {
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('login-popup').style.display = 'none';
+        }
+
+        function showSignup() {
+            document.getElementById('login-overlay').style.display = 'block';
+            document.getElementById('signup-popup').style.display = 'block';
+        }
+
+        function hideSignup() {
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('signup-popup').style.display = 'none';
+        }
+
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            const user = existingUsers.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert('Login successful!');
+                hideLogin();
+            } else {
+                alert('Invalid username or password.');
+            }
+            return false;
+        }
+
+        function signup() {
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            if (emails.some(e => e.email === email)) {
+                alert('Email already in use!');
+                return false;
+            }
+
+            alert('Sign up successful!');
+            hideSignup();
+            return false;
+        }
+
+        let cart = [];
+
+        function addToCart(productName, productPrice) {
+            const product = cart.find(item => item.name === productName);
+            if (product) {
+                product.quantity++;
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1 });
+            }
+            updateCart();
+        }
+
+        function removeFromCart(productName) {
+            cart = cart.filter(item => item.name !== productName);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const cartItem = document.createElement('li');
+                cartItem.innerHTML = `${item.name} - ${item.price} MAD x ${item.quantity} <button onclick="removeFromCart('${item.name}')">Remove</button>`;
+                cartItemsContainer.appendChild(cartItem);
+                total += item.price * item.quantity;
+            });
+            document.getElementById('cart-total').innerText = `Total: ${total.toFixed(2)} MAD`;
+        }
+
+        function showCart() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('cart-popup').style.display = 'block';
+        }
+
+        function hideCart() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('cart-popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
